@@ -12,6 +12,9 @@ find ./ | grep Makefile | grep mosdns | xargs rm -f
 git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
 git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 
+src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main
+src-git passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main
+
 # 调整 Docker 到 服务 菜单
 sed -i 's/"admin"/"admin", "services"/g' feeds/luci/applications/luci-app-dockerman/luasrc/controller/*.lua
 sed -i 's/"admin"/"admin", "services"/g; s/admin\//admin\/services\//g' feeds/luci/applications/luci-app-dockerman/luasrc/model/cbi/dockerman/*.lua
@@ -23,8 +26,8 @@ sed -i 's|admin\\|admin\\/services\\|g' feeds/luci/applications/luci-app-dockerm
 
 # 移除 openwrt feeds 自带的核心库
 rm -rf feeds/packages/net/{xray-core,v2ray-geodata,sing-box,chinadns-ng,dns2socks,hysteria,ipt2socks,microsocks,naiveproxy,shadowsocks-libev,shadowsocks-rust,shadowsocksr-libev,simple-obfs,tcping,trojan-plus,tuic-client,v2ray-plugin,xray-plugin,geoview,shadow-tls}
-git clone https://github.com/xiaorouji/openwrt-passwall-packages package/passwall-packages
+git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages package/passwall-packages
 
 # 移除 openwrt feeds 过时的luci版本
 rm -rf feeds/luci/applications/luci-app-passwall
-git clone https://github.com/xiaorouji/openwrt-passwall package/passwall-luci
+git clone https://github.com/Openwrt-Passwall/openwrt-passwall package/passwall-luci
