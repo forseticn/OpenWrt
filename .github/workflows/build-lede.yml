@@ -10,8 +10,7 @@ env:
   REPO_BRANCH: master
    # FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/lede.config
-  DIY_P1_SH: diy/lede1.sh
-  DIY_P2_SH: diy/lede2.sh
+  DIY_SH: diy/lede.sh
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -69,13 +68,6 @@ jobs:
         mixkey: ubuntu-22.04-${{ env.REPO_BRANCH }}
         prefix: /workdir/openwrt
     
-    - name: Load custom feeds 加载自定义源
-      run: |
-        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-        chmod +x $DIY_P1_SH
-        cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P1_SH
-    
     - name: Update & Install feeds 更新并安装源
       working-directory: ./openwrt
       run: |
@@ -86,9 +78,9 @@ jobs:
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_P2_SH
+        chmod +x $DIY_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P2_SH
+        $GITHUB_WORKSPACE/$DIY_SH
 
     - name: Download package 下载文件包
       id: package
