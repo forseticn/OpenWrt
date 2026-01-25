@@ -68,7 +68,7 @@ jobs:
         mixkey: ubuntu-22.04-${{ env.REPO_BRANCH }}
         prefix: /workdir/openwrt
     
-    - name: Add a custom feed 添加自定义源
+    - name: Add custom feed 添加自定义源
       working-directory: ./openwrt
       run: |
         echo 'src-git passwall_packages https://github.com/OpenWrt-Passwall/openwrt-passwall-packages.git;main' >>feeds.conf.default
